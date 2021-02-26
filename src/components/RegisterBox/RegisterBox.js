@@ -37,13 +37,23 @@ const Branding = styled.h1`
   font-size: 4rem;
 `
 
-const LoginBox = () => {
+const Error = styled.span`
+  font-size: .8em;
+  color: red;
+`
+
+const RegisterBox = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const [errorMessage, setErrorMessage] = useState("");
 
     const createUserWithEmailAndPassword = async (email, password) => {
-        await auth.createUserWithEmailAndPassword(email, password)
+        try {
+            await auth.createUserWithEmailAndPassword(email, password)
+        } catch (err) {
+            setErrorMessage(err.message)
+        }
     }
 
     return (
@@ -55,6 +65,7 @@ const LoginBox = () => {
             }}>
                 <Input placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
                 <Input placeholder="password" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                <Error>{errorMessage}</Error>
                 <Button type="submit">Register</Button>
                 <StyledParagraph>Already have account? <StyledLink to="/">Login.</StyledLink></StyledParagraph>
             </StyledForm>
@@ -62,4 +73,4 @@ const LoginBox = () => {
     )
 }
 
-export default LoginBox
+export default RegisterBox

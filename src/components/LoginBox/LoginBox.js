@@ -37,16 +37,26 @@ const Branding = styled.h1`
   font-size: 4rem;
 `
 
+const Error = styled.span`
+  font-size: .8em;
+  color: red;
+`
+
 const LoginBox = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     const loginWithEmailAndPassword = async (email, password) => {
-        await auth.signInWithEmailAndPassword(email, password)
+        try {
+            await auth.signInWithEmailAndPassword(email, password)
+        } catch (err) {
+            setErrorMessage(err.message)
+        }
     }
 
-    return(
+    return (
         <LoginBoxWrapper>
             <Branding>Supporteo</Branding>
             <StyledForm onSubmit={e => {
@@ -54,9 +64,12 @@ const LoginBox = () => {
                 loginWithEmailAndPassword(email, password)
             }}>
                 <Input placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-                <Input placeholder="password" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                <Input placeholder="password" type="password" value={password}
+                       onChange={e => setPassword(e.target.value)}/>
+                <Error>{errorMessage}</Error>
                 <Button>Login</Button>
-                <StyledParagraph>You don't have account? <StyledLink to="/register">Register</StyledLink></StyledParagraph>
+                <StyledParagraph>You don't have account? <StyledLink
+                    to="/register">Register</StyledLink></StyledParagraph>
             </StyledForm>
         </LoginBoxWrapper>
     )

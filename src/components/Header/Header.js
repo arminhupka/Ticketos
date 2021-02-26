@@ -90,7 +90,7 @@ const PageOverlay = styled.div`
 const Header = () => {
 
     const {admin} = useContext(UserContext)
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
 
     const handleOverlay = () => setVisible(!visible)
 
@@ -101,7 +101,9 @@ const Header = () => {
             <Topbar/>
             <StyledHeader>
                 <InnerContainer>
+                    <StyledLink to="/">
                     <h1>Supporteo</h1>
+                    </StyledLink>
                     <StyledNav visible={visible}>
                         <StyledList>
                             <StyledItem><StyledLink to="/">Dashboard</StyledLink></StyledItem>
