@@ -7,7 +7,12 @@ const Button = styled.button`
   background-color: ${({theme}) => theme.primary};
   border: none;
   border-radius: .5rem;
+  outline: none;
   text-transform: uppercase;
+  transition: background-color .4s;
+  :hover {
+    background-color: ${({theme}) => theme.primaryLight};
+  }
   
   ${({primary}) => (
       primary && css`

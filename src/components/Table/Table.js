@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import styled from "styled-components";
+import StatusBlob from "../StatusBlob/StatusBlob";
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -66,7 +67,7 @@ const Table = ({tickets}) => (
                         <StyledTableData>email</StyledTableData>
                         <StyledTableData>{ticket.title}</StyledTableData>
                         <StyledTableData>category</StyledTableData>
-                        <StyledTableData>{ticket.status}</StyledTableData>
+                        <StyledTableData><StatusBlob status={ticket.status}/></StyledTableData>
                         <StyledTableData>{new Date(ticket.createdAt.seconds * 1000).toLocaleString("pl-PL")}</StyledTableData>
                         <StyledTableData>
                             <button>
