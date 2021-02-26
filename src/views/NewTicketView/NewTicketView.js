@@ -1,7 +1,7 @@
 import {useState, useContext} from 'react';
 import styled from "styled-components";
 import {Helmet} from "react-helmet";
-import {nanoid} from "nanoid";
+import shortid from 'shortid'
 import {Container} from "../../styles/GlobalStyle";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
@@ -53,8 +53,9 @@ const NewTicketView = () => {
     const [ticketMessage, setTicketMessage] = useState("");
     const [notification, setNotification] = useState(false);
 
+
     const addNewTicket = async () => {
-        const id = nanoid();
+        const id = shortid();
         await firestore.collection("tickets").doc(id).set({
             id,
             userId: user.uid,

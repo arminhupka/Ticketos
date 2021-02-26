@@ -1,4 +1,4 @@
-import {useState, useContext} from 'react'
+import {useState, useContext, useRef, useEffect} from 'react'
 import styled from "styled-components";
 import {Link} from 'react-router-dom'
 import {FaBars} from "react-icons/fa";
@@ -78,7 +78,7 @@ const PageOverlay = styled.div`
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, .5);
   backdrop-filter: blur(2px);
   opacity: ${({visible}) => visible ? 1 : 0};
   visibility: ${({visible}) => visible ? "visible" : "hidden"};
@@ -91,10 +91,17 @@ const Header = () => {
 
     const {admin} = useContext(UserContext)
     const [visible, setVisible] = useState(false)
+    const listRef = useRef(StyledList)
+
+    useEffect(() => {
+        const linksArr = Array.from(listRef.current.children);
+        linksArr.forEach(link => link.addEventListener('click', () => setVisible(false)))
+    }, [])
 
     const handleOverlay = () => setVisible(!visible)
 
     const userLogout = () => auth.signOut();
+
 
     return (
         <>
@@ -102,19 +109,24 @@ const Header = () => {
             <StyledHeader>
                 <InnerContainer>
                     <StyledLink to="/">
-                    <h1>Supporteo</h1>
+                        <h1>Supporteo</h1>
                     </StyledLink>
                     <StyledNav visible={visible}>
-                        <StyledList>
+                        <StyledList ref={listRef}>
                             <StyledItem><StyledLink to="/">Dashboard</StyledLink></StyledItem>
                             <StyledItem><StyledLink to="/new-ticket">New Ticket</StyledLink></StyledItem>
                             <StyledItem><StyledLink to="/tickets">My Tickets</StyledLink></StyledItem>
-                            <StyledItem><StyledLink to="/all-tickets">All Tickets</StyledLink></StyledItem>
                             <StyledItem><StyledLink to="/profile">Profile</StyledLink></StyledItem>
                             {admin ?
-                                <StyledItem><StyledLink to="/settings">Settings</StyledLink></StyledItem>
+                                <>
+                                    <StyledItem><StyledLink to="/all-tickets">All Tickets</StyledLink></StyledItem>
+                                    <StyledItem><StyledLink to="/settings">Settings</StyledLink></StyledItem>
+                                </>
                                 : null}
-                            <StyledItem onClick={userLogout}>Logout</StyledItem>
+                            <StyledItem onClick={() => {
+                                userLogout()
+                                localStorage.removeItem("user")
+                            }}>Logout</StyledItem>
                         </StyledList>
                     </StyledNav>
                     <HamburgerIcon onClick={() => setVisible(!visible)}/>

@@ -1,6 +1,4 @@
-import { useEffect} from 'react'
 import styled from "styled-components";
-
 
 const StyledNotification = styled.div`
   position: absolute;
@@ -20,15 +18,6 @@ const StyledNotification = styled.div`
 `
 
 const Notification = ({notification}) => {
-
-    const sayHello = () => console.log("Hello")
-
-
-    useEffect(() => {
-        if (notification) {
-            sayHello();
-        }
-    }, [notification])
 
     return (
         <StyledNotification notification={notification}>
