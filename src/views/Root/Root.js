@@ -15,7 +15,7 @@ import {UserContext} from "../../provider/UserProvider";
 
 
 const Root = () => {
-    const {user, admin} = useContext(UserContext);
+    const {admin} = useContext(UserContext);
     const userData = localStorage.getItem("user");
 
     return (
