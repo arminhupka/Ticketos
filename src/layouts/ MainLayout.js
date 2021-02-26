@@ -8,9 +8,6 @@ import Header from "../components/Header/Header";
 const MainLayout = ({children}) => (
     <ThemeProvider theme={Theme}>
         <GlobalStyle/>
-        <Helmet>
-            <meta name="theme-color" content="#3955CE"/>
-        </Helmet>
         <Header/>
         {children}
     </ThemeProvider>
