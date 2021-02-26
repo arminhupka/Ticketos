@@ -9,7 +9,7 @@ const MainLayout = ({children}) => (
     <ThemeProvider theme={Theme}>
         <GlobalStyle/>
         <Helmet>
-            <meta name="theme-color" content={Theme.primary}/>
+            <meta name="theme-color" content="#3955CE"/>
         </Helmet>
         <Header/>
         {children}
