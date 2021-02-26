@@ -15,8 +15,7 @@ import {UserContext} from "../../provider/UserProvider";
 
 
 const Root = () => {
-    const {admin} = useContext(UserContext);
-    const userData = localStorage.getItem("user");
+    const {user, admin} = useContext(UserContext);
 
     return (
         <>
@@ -26,7 +25,7 @@ const Root = () => {
                       rel="stylesheet"/>
             </Helmet>
             <BrowserRouter>
-                {userData ?
+                {user ?
                     <MainLayout>
                         <Redirect to='/'/>
                         <Route exact path="/" component={DashboardView}/>

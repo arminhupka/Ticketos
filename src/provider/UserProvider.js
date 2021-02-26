@@ -15,7 +15,7 @@ const createUser = async (user) => {
             uid
         });
     }
-    ;
+
 };
 
 const UserProvider = ({children}) => {
@@ -27,7 +27,6 @@ const UserProvider = ({children}) => {
         auth.onAuthStateChanged(async user => {
             await createUser(user);
             setUser(user);
-            localStorage.setItem("user", JSON.stringify(user));
             if (user) {
                 const userRef = await firestore.collection('users').doc(user.uid);
                 const snapshot = await userRef.get();
