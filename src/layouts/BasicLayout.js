@@ -1,13 +1,11 @@
 import {ThemeProvider} from "styled-components";
 import Theme from "../styles/Theme";
-import Header from "../components/Header/Header";
+import GlobalStyle from "../styles/GlobalStyle";
 
-
-const MainLayout = ({children}) => (
+const BasicLayout = ({children}) => (
     <ThemeProvider theme={Theme}>
-        <Header/>
         {children}
     </ThemeProvider>
 )
 
-export default MainLayout
+export default BasicLayout

@@ -11,14 +11,20 @@ import AllUsersTicketsView from "../AllUsersTicketsView/AllUsersTicketsView";
 import TicketView from "../TicketView/TicketView";
 import ProfileView from "../ProfileView/ProfileView";
 import MainLayout from "../../layouts/ MainLayout";
+import CreateTicketView from "../CreateTicketVIew/CreateTicketView";
 import {UserContext} from "../../provider/UserProvider";
+import GlobalStyle from "../../styles/GlobalStyle";
 
 
 const Root = () => {
-    const {user, admin} = useContext(UserContext);
+    // const {admin} = useContext(UserContext);
+    const admin = true;
+    const user = localStorage.getItem("user")
+    console.log(admin)
 
     return (
         <>
+            <GlobalStyle/>
             <Helmet>
                 <link rel="preconnect" href="https://fonts.gstatic.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
@@ -41,8 +47,8 @@ const Root = () => {
                     </MainLayout>
                     :
                     <>
-                        <Redirect to='/'/>
-                        <Route exact path="/" component={LoginView}/>
+                        <Route exact path="/" component={CreateTicketView}/>
+                        <Route path="/login" component={LoginView}/>
                         <Route path="/register" component={RegisterView}/>
                     </>}
             </BrowserRouter>

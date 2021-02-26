@@ -89,7 +89,8 @@ const PageOverlay = styled.div`
 
 const Header = () => {
 
-    const {admin} = useContext(UserContext)
+    // const {admin} = useContext(UserContext)
+    const admin = true;
     const [visible, setVisible] = useState(false)
     const listRef = useRef(StyledList)
 

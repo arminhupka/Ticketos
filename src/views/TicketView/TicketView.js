@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Helmet from "react-helmet";
 import styled from "styled-components";
 import {Container} from "../../styles/GlobalStyle";
 import {firestore} from "../../services/firebase";
@@ -42,11 +43,15 @@ const TicketView = ({match: {params: {id}}}) => {
     }
 
     return (
+        <>
+            <Helmet>
+                <title>{`${ticket.title} | Supporteo`}</title>
+            </Helmet>
         <StyledSection>
             <InnerContainer>
                 {ticket ?
                     <>
-                        <Heading title={`${ticket.title}`}/>
+                        <Heading title={ticket.title}/>
                         <ContentContainer>
                             <MessagesWrapper>
                                 {ticket.messages.map(m => <Message message={m.message}/>)}
@@ -59,6 +64,7 @@ const TicketView = ({match: {params: {id}}}) => {
                 }
             </InnerContainer>
         </StyledSection>
+        </>
     )
 }
 

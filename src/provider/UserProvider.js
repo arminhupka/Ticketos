@@ -31,6 +31,7 @@ const UserProvider = ({children}) => {
                 const userRef = await firestore.collection('users').doc(user.uid);
                 const snapshot = await userRef.get();
                 const adminState = await snapshot.data().isAdmin
+                localStorage.setItem("user", JSON.stringify(snapshot.data()))
                 setAdmin(adminState)
             }
         })

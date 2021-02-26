@@ -7,7 +7,7 @@ const StyledInput = styled.input`
   border: none;
   border-radius: .5rem;
   font-family: 'Montserrat', sans-serif;
-  box-shadow: 0 1px 3px rgb(50 50 93 / 15%), 0 1px 0 rgb(0 0 0 / 2%);
+  box-shadow: 0 1px 3px rgb(50 50 93 / 5%), 0 1px 10px rgb(0 0 0 / 2%);
   ::placeholder {
     color: ${({theme}) => theme.gray};
   }
