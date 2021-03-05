@@ -1,43 +1,34 @@
-import {createContext, useState, useEffect} from 'react'
-import {auth, firestore} from "../services/firebase";
+import React, { createContext, useEffect } from 'react';
+import { auth, firestore } from '../services/firebase';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export const UserContext = createContext();
 
 const createUser = async (user) => {
-    if (!user) return;
-    const userRef = firestore.collection('users').doc(user.uid);
-    const snapshot = await userRef.get();
-    if (!snapshot.exists) {
-        const {email, displayName, uid} = user;
-        await userRef.set({
-            email,
-            displayName,
-            uid
-        });
-    }
-
+  if (!user) return;
+  const userRef = firestore.collection('users').doc(user.uid);
+  const snapshot = await userRef.get();
+  if (!snapshot.exists) {
+    const { email, displayName, uid } = user;
+    await userRef.set({
+      email,
+      displayName,
+      uid,
+    });
+  }
 };
 
-const UserProvider = ({children}) => {
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useLocalStorage('user', null);
 
-    const [user, setUser] = useState("")
-    const [admin, setAdmin] = useState("")
+  useEffect(() => {
+    auth.onAuthStateChanged(async (userAuth) => {
+      await createUser(userAuth);
+      setUser(userAuth);
+    });
+  }, []);
 
-    useEffect(() => {
-        auth.onAuthStateChanged(async user => {
-            await createUser(user);
-            setUser(user);
-            if (user) {
-                const userRef = await firestore.collection('users').doc(user.uid);
-                const snapshot = await userRef.get();
-                const adminState = await snapshot.data().isAdmin
-                localStorage.setItem("user", JSON.stringify(snapshot.data()))
-                setAdmin(adminState)
-            }
-        })
-    }, [])
+  return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
+};
 
-    return <UserContext.Provider value={{user, admin}}>{children}</UserContext.Provider>
-}
-
-export default UserProvider
+export default UserProvider;

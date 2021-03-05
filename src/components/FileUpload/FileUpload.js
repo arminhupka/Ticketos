@@ -6,6 +6,6 @@ const StyledUploader = styled.input`
   border-radius: .5rem;
 `
 
-const FileUpload = () => <StyledUploader type="file"/>
+const FileUpload = ({handleFile}) => <StyledUploader type="file" onChange={handleFile}/>
 
 export default FileUpload

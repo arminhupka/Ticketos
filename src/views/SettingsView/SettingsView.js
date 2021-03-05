@@ -1,24 +1,22 @@
-import {Helmet} from "react-helmet";
-import styled from "styled-components";
-import {Container} from "../../styles/GlobalStyle";
-import Heading from "../../components/Heading/Heading";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import { Container } from '../../styles/GlobalStyle';
+import Heading from '../../components/Heading/Heading';
 
-const StyledSection = styled.section``
+const StyledSection = styled.section``;
 
-const SettingsView = () => {
+const SettingsView = () => (
+  <>
+    <Helmet>
+      <title>Settings | Supporteo</title>
+    </Helmet>
+    <Container>
+      <StyledSection>
+        <Heading title="Settings" />
+      </StyledSection>
+    </Container>
+  </>
+);
 
-    return (
-        <>
-            <Helmet>
-                <title>Settings | Supporteo</title>
-            </Helmet>
-            <Container>
-                <StyledSection>
-                    <Heading title="Settings"/>
-                </StyledSection>
-            </Container>
-        </>
-    )
-}
-
-export default SettingsView
+export default SettingsView;
