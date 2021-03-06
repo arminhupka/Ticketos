@@ -24,6 +24,8 @@ const CategoryItem = styled.span`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.lightGray};
+  border-radius: 0.3rem;
+  box-shadow: 0 0.5rem 2rem 0 rgb(136 152 170 / 15%);
 `;
 
 const StyledIcon = styled(FaTimes)``;

@@ -41,25 +41,15 @@ const DashboardView = () => {
   const [categoriesNumber, setCategoriesNumber] = useState(0);
   const [agents, setAgents] = useState(0);
 
-  const state = {
-    options: {
-      chart: {
-        id: 'basic-bar',
-      },
-      xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-      },
+  const pieData = {
+    series: [activeTickets, closedTickets],
+    chartOptions: {
+      labels: ['Active', 'Closed'],
     },
-    series: [
-      {
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91],
-      },
-    ],
   };
 
   const getTicketsNumber = async () => {
-    const ticketsRef = await firestore.collection('tickets');
+    const ticketsRef = await firestore.collection('tickets').where('status', '!=', 'Closed');
     const snapshot = await ticketsRef.get();
     setActiveTickets(snapshot.docs.length);
   };
@@ -106,8 +96,7 @@ const DashboardView = () => {
             <InfoCard title="Agents" count={agents} />
           </CardWrapper>
           <ChartWrapper>
-            <Chart options={state.options} series={state.series} type="bar" />
-            <Chart options={state.options} series={state.series} type="bar" />
+            <Chart type="donut" options={pieData.chartOptions} series={pieData.series} width="50%" />
           </ChartWrapper>
         </StyledSection>
       </InnerContainer>

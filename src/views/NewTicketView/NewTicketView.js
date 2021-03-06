@@ -21,6 +21,9 @@ const StyledSection = styled.section`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 2rem 2.4rem;
+  background-color: #fff;
+  border-radius: 0.3rem;
 
   & > * {
     margin-bottom: 2rem;

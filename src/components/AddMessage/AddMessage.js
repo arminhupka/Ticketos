@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
   padding: 2rem;
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
 
   @media screen and (min-width: 992px) {
     //margin-left: 2rem;

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import LoginView from '../LoginView/LoginView';
 import RegisterView from '../RegisterView/RegisterView';
-import DashboardView from '../DashboardView/DasboardView';
+import DashboardView from '../DashboardView/DashboardView';
 import TicketsView from '../TicketsView/TicketsView';
 import NewTicketView from '../NewTicketView/NewTicketView';
 import SettingsView from '../SettingsView/SettingsView';

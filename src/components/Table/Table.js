@@ -17,7 +17,8 @@ const StyledTableHead = styled.thead`
 `;
 
 const StyledTableRow = styled.tr`
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid ${({ theme }) => theme.lightGray};
+  transition: background-color 0.3s;
 
   :hover {
     background-color: rgba(0, 0, 0, 0.05);
@@ -33,7 +34,7 @@ const StyledTableBody = styled.tbody``;
 const TableWrapper = styled.div`
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
   overflow: hidden;
   overflow-x: auto;
 `;
