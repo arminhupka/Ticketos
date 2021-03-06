@@ -1,6 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FaThumbsUp } from 'react-icons/all';
+
+const LoaderAnim = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  
+  100% {
+    transform: translateX(0);
+  }
+`;
 
 const CardWrapper = styled.div`
   display: flex;
@@ -39,13 +52,32 @@ const Count = styled.span`
   font-weight: 800;
 `;
 
+const Loader = styled.div`
+  position: relative;
+  height: 100%;
+  width: 30%;
+  margin-left: auto;
+  background-color: ${({ theme }) => theme.primaryDark};
+  overflow: hidden;
+  ::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: ${({ theme }) => theme.primary};
+    animation: ${LoaderAnim} 1s infinite;
+    transform: translateX(0);
+  }
+`;
+
 const InfoCard = ({ title, count }) => (
   <CardWrapper>
     <IconWrapper>
       <FaThumbsUp />
     </IconWrapper>
     <Title>{title}</Title>
-    <Count>{count}</Count>
+    {count ? <Count>{count}</Count> : <Loader />}
   </CardWrapper>
 );
 

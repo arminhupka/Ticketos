@@ -96,7 +96,8 @@ const DashboardView = () => {
             <InfoCard title="Agents" count={agents} />
           </CardWrapper>
           <ChartWrapper>
-            <Chart type="donut" options={pieData.chartOptions} series={pieData.series} width="50%" />
+            <Chart type="pie" options={pieData.chartOptions} series={pieData.series} />
+            <Chart type="donut" options={pieData.chartOptions} series={pieData.series} />
           </ChartWrapper>
         </StyledSection>
       </InnerContainer>
